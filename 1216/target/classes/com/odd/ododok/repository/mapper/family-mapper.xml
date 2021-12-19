@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Family"> 
+ 
+ 	<insert id = "join" parameterType="family">
+ 		insert into odd_family	(f_id, f_pw, f_name, f_address, f_phone, f_filename)
+ 		 values (#{f_id}, #{f_pw}, #{f_name}, #{f_address}, #{f_phone}, #{f_filename})
+ 	</insert>
+ 	
+ 	<select id ="login" resultType="family">
+ 		select * from odd_family where f_id = #{f_id} and f_pw = #{f_pw}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ </mapper>
