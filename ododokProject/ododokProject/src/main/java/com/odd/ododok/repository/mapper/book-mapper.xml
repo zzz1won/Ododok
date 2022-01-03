@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Book">
+ 
+ 	<select id="bookAll" resultType="book">
+ 	select * from odd_book
+ 	</select>
+  
+  	<select id = "readingList" resultType="book">
+  	select * from odd_book
+  	</select>
+  	
+  	<select id = "best10" resultType="book">
+  	select * from odd_book where b_number = ${b_number} 
+  	</select>
+  	
+  	<select id = "search" parameterType="java.util.HashMap" resultType="book">
+  	select * from odd_book 
+	<include refid="sear"></include>
+	</select>
+	
+	<sql id="sear">
+		<choose>
+			<when test="type=='b_name'">
+				where b_name like concat('%', #{word}, '%') 
+			</when>
+			<when test="type=='b_writer'">
+				where b_writer like concat('%', #{word}, '%') 
+			</when>
+			<when test="type=='b_company'">
+				where b_company like concat('%', #{word}, '%') 
+			</when>
+		</choose>
+	</sql>
+	
+	<select id = "recommendList" resultType="book">
+	select * from odd_book
+	</select>
+	
+	<select id = "newList" resultType="book">
+	select * from odd_book where b_year = '2021' order by b_number asc
+	</select>
+  	
+	 	
+	 	 	<!-- 페이징기능, 선생님이 주심! --> 	 	
+		<select id="pagingList" parameterType="int" resultType="book">
+			select * from odd_book order by b_number asc limit #{pagingStart}, 10
+		</select>
+		
+		<select id="pagingList1" parameterType="java.util.HashMap" resultType="book">
+			select * from odd_book order by b_number asc limit #{start}, #{limit}
+		</select>
+		
+	 	<select id="count" resultType="int">         
+			select count(b_number) from odd_book
+		</select>  	
+  	
+  	
+  	
+ </mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Family"> 
+ 
+ 	<insert id = "join" parameterType="family">
+ 		insert into odd_family	(f_id, f_pw, f_name, f_address, f_phone, f_filename)
+ 		 values (#{f_id}, #{f_pw}, #{f_name}, #{f_address}, #{f_phone}, #{f_filename})
+ 	</insert>
+ 	
+ 	<select id ="login" resultType="family">
+ 		select * from odd_family where f_id = #{f_id} and f_pw = #{f_pw}
+ 	</select>
+ 	
+ 	<select id="mypage" resultType="family">
+ 		select * from odd_family where f_number = #{f_number}
+ 	</select>
+ 	
+ 	
+ 	<select id="editForm" resultType="family">
+ 		select * from odd_family where f_number = #{f_number}
+ 	</select>
+ 	
+ 	
+ 	<update id="edit" parameterType="family">
+ 		update odd_family set f_pw = #{f_pw}, f_phone = #{f_phone}, f_address = #{f_address} where f_number = #{f_number} 
+ 	</update>
+ 	
+ 	<select id = "famList" resultType="family">
+ 		select * from odd_family
+ 	</select>
+ 	
+ 	<select id = "delete" parameterType ="long" resultType="family">
+ 	delete from odd_family where f_number = #{f_number}
+ 	</select>
+ 	
+ 	<!-- 1227. 포인트증가 -->
+ 	<update id = "addPoint" parameterType="long">
+ 		update odd_family set f_point = f_point+10 where f_number = #{f_number}
+ 	</update>
+ 	
+ 	<update id = "addPoint2" parameterType="long">
+ 		update odd_family set f_point = f_point+5 where f_number = #{f_number}
+ 	</update>
+ 	
+ 	 <update id = "donaPoint" parameterType="long">
+ 		update odd_family set f_point = f_point+1000 where f_number = #{f_number}
+ 	</update>
+ 	
+ 	<update id = "purPoint" parameterType="long">
+ 		update odd_family set f_point = f_point-5000 where f_number = #{f_number}
+ 	</update>
+ 	
+ 	<select id="pwch" parameterType="family" resultType="long">
+ 		select f_number from odd_family where f_id= #{f_id}, f_pw=#{f_pw}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ </mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Review">
+ 	
+ 	<insert id="reviewWrite" parameterType="review">
+ 		insert into odd_review (f_id, b_number, b_name, r_contents, r_rating)
+			values (#{f_id} , #{b_number} ,#{b_name} ,#{r_contents} ,#{r_rating});
+ 	</insert>
+ 
+ 	
+ 	<select id="selectBook" resultType="book">
+ 		select * from odd_book where b_number = #{b_number}
+ 	</select>
+ 
+
+<!--  	<select id="view" resultType="review">
+ 		select * from odd_review where r_number = #{r_number}
+ 	</select> -->
+ 	
+ 
+<!--   	<select id ="reviewAll" resultType="reivew">
+ 		select * from odd_review where b_number = #{b_number}
+ 	</select>
+ -->
+ 
+ 	<select id = "reviewAll" resultType="review" parameterType="long">
+ 		select * from odd_review where b_number = #{b_number} order by r_number desc 
+ 	</select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </mapper>

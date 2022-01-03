@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Trade">
+ 
+ 	<insert id="donate" parameterType = "trade">
+ 		insert into odd_trade (t_number, t_check, b_name, b_writer, t_id, l_name)
+ 			values (#{t_number}, #{t_check}, #{b_name}, #{b_writer}, #{t_id}, #{l_name})
+ 	</insert>
+ 
+ 
+	<select id="purList" resultType = "trade">
+	select * from odd_trade where t_check = "보유"
+	</select> 
+ 
+ 
+   	<update id="purchas" parameterType = "trade">
+ 		update odd_trade set t_check = "기증완료" where t_number = #{t_number} 
+ 	</update>
+ 
+ 
+ 
+  	<select id = "search" parameterType="java.util.HashMap" resultType="trade">
+	  	select * from odd_trade 
+		<include refid="sear"></include>
+	</select>
+	
+		<sql id="sear">
+				<choose>
+					<when test="type=='b_name'">
+						where b_name like concat('%', #{word}, '%') 
+					</when>
+					<when test="type=='b_writer'">
+						where b_writer like concat('%', #{word}, '%') 
+					</when>
+						<when test="type=='l_name'">
+						where l_name like concat('%', #{word}, '%') 
+					</when>
+				</choose>
+		</sql>
+ 	
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </mapper>

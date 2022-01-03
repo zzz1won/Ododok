@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases> 
+		<typeAlias alias="Family" type="com.odd.ododok.dto.FamilyDTO"/>
+		<typeAlias alias="Write" type="com.odd.ododok.dto.WriteDTO"/>
+		<typeAlias alias="Comment" type="com.odd.ododok.dto.CommentDTO"/>
+		<typeAlias alias="Library" type="com.odd.ododok.dto.LibraryDTO"/>
+		<typeAlias alias="Event" type="com.odd.ododok.dto.EventDTO"/>
+		<typeAlias alias="Book" type="com.odd.ododok.dto.BookDTO"/>
+		<typeAlias alias="Trade" type="com.odd.ododok.dto.TradeDTO"/>
+		<typeAlias alias="Notice" type="com.odd.ododok.dto.NoticeDTO"/>
+		<typeAlias alias="Review" type="com.odd.ododok.dto.ReviewDTO"/>
+	</typeAliases>
+</configuration>

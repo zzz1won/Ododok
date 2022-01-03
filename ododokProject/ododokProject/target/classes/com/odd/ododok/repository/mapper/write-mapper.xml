@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Write"> 
+ 
+ 	<!-- 12/20 -->
+ 		
+	 	<select id="writeAll" resultType="write">
+	 		(select * from odd_notice order by w_number desc limit 3)
+	 		union
+	 		select * from odd_write order by w_number desc
+	 	</select>
+	 	
+	 	<insert id="essay" parameterType="write">
+	 		insert into odd_write(f_id, w_title, w_contents, w_filename, w_date, w_category)
+	 			values (#{f_id}, #{w_title}, #{w_contents}, #{w_filename}, now(), #{w_category})
+	 	</insert>
+	 	
+	 	
+	 	 	<!-- 페이징기능, 선생님이 주심! - 이거 추가하면 404가 뜬다 ㅜㅜ --> 	 	
+		<select id="pagingList" parameterType="int" resultType="write">
+			(select * from odd_notice order by w_number desc limit 3)
+	 		union all
+	 		(select * from odd_write order by w_number desc limit 7)
+	 		limit #{pagingStart}, 5
+<!-- 			select * from odd_write 
+			order by w_number desc limit #{pagingStart}, 5 -->
+		</select>
+		
+		<select id="pagingList1" parameterType="java.util.HashMap" resultType="write">
+			(select * from odd_notice order by w_number desc limit 3)
+	 		union all
+	 		select * from odd_write order by w_number desc
+	 		limit #{start}, #{limit}
+			<!-- select * from odd_write order by w_number desc limit #{start}, #{limit} -->
+		</select>
+		
+	 	<select id="count" resultType="int">         
+			select count(w_number) from odd_write
+		</select>
+ 	 	
+
+	<!-- 12/21 -->
+		<!-- 조회수 증가  -->
+		<update id = "hits" parameterType = "long">
+		update odd_write set w_hits = w_hits+1 where w_number = #{w_number} 
+		</update>
+ 	
+ 		<!-- 글 상세조회 -->
+ 		<select id="writeView" resultType="write">
+ 		select * from odd_write where w_number = #{w_number}
+ 		</select>
+ 	
+ 		<!-- 글 삭제 -->
+ 		<select id = "delete" parameterType = "long">
+ 		delete from odd_write where w_number = #{w_number}
+ 		</select>
+ 		
+ 		<!-- 글 수정 페이지 출력 -->
+ 		<select id ="updateForm" parameterType="long" resultType="write">
+ 			select * from odd_write where w_number = #{w_number}
+ 		</select>
+ 		
+ 		
+ 		<!-- 글 수정 -->
+ 		<update id = "update" parameterType="write">
+ 			update odd_write set w_title = #{w_title}, w_contents = #{w_contents} where w_number = #{w_number} 
+ 		</update>
+ 	
+ 	
+ 	  	<select id = "search" parameterType="java.util.HashMap" resultType="write">
+	  	select * from odd_write 
+		<include refid="sear"></include>
+		</select>
+	
+			<sql id="sear">
+				<choose>
+					<when test="type=='w_title'">
+						where w_title like concat('%', #{word}, '%') 
+					</when>
+					<when test="type=='f_id'">
+						where f_id like concat('%', #{word}, '%') 
+					</when>
+				</choose>
+			</sql>
+ 	
+ 		<insert id="ntcView" parameterType = "notice">
+ 			insert into odd_notice(f_id, w_title, w_contents, w_filename, w_date, w_category)
+	 			values (#{f_id}, #{w_title}, #{w_contents}, #{w_filename}, now(), #{w_category})
+ 		</insert>
+ 	
+<!-- 		<select id="ntcAll" resultType="notice">
+	 		select * from odd_notice order by ntc_number desc
+	 	</select> -->
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ </mapper>
